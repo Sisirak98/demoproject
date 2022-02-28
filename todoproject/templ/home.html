@@ -1,0 +1,56 @@
+
+{% extends 'base.html'%}
+{% block content %}
+<div class="container-fluid">
+    <div class="row">
+    <div class="col-md-12">
+    <div class="banner">
+        <div class="bannername">
+            <h1><i>ToDo</i></h1>
+        </div>
+    </div>
+    </div>
+    </div>
+</div>
+<div class="container" align="center">
+    <div class="row">
+        <div class="col-md-6 ">
+            <h4 style="color:red">ADD TASK</h4>
+<form method="post" class="p-3 shadow" style="background-color:yellow">
+    {% csrf_token %}
+    <div class="form-group">
+  <input type="text" name="name" placeholder="Enter  name" class="form-control" style="background-color:LemonChiffon">
+        </div>
+    <div class="form-group">
+  <input type="text" name="prio" placeholder="Enter your priority" class="form-control" style="background-color:LemonChiffon">
+    </div>
+    <div>
+    <input type="date" name="date" placeholder="Enter your date" class="form-control" style="background-color:LemonChiffon">
+    </div>
+  <input type="submit" alt="submit" class="btn btn-success">
+
+</form>
+                </div>
+        <div class="col-md-6">
+            <h3 style="color:Lime">Task to be completed</h3>
+            {% for i in task %}
+            <div class="shadow card" style="background-color:LightCyan">
+
+                <div class="card-body" style="color:LightCyan">
+                    <h4 class="card-title" style="color:blue">{{i.name}}</h4>
+                    <p style="color:Indigo"><b>{{i.prio}}</b></p>
+                    <p style="color:Indigo">{{i.date}}</p>
+                    <a class="btn btn-danger" href="{% url 'delete' i.id %}">Done</a>
+                    <a class="btn btn-warning" href="{% url 'edit' i.id %}">Update</a>
+                </div>
+            </div>
+            <br>
+             {% endfor %}
+        </div>
+        </div>
+</div>
+    </div>
+{% endblock %}
+
+
+
